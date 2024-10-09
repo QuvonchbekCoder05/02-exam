@@ -2,8 +2,10 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import (
     TeamMemberViewSet, ServiceViewSet, PublicationViewSet, ReviewViewSet, 
-    SearchViewSet, ContactInformationViewSet, AboutViewSet
+    SearchViewSet, ContactInformationViewSet, AboutViewSet,NewsViewSet
 )
+
+
 
 router = DefaultRouter()
 router.register(r'team-member', TeamMemberViewSet, basename='team-member')
@@ -13,6 +15,7 @@ router.register(r'reviews', ReviewViewSet, basename='reviews')
 router.register(r'search', SearchViewSet, basename='search')
 router.register(r'contact-information', ContactInformationViewSet, basename='contact-information')
 router.register(r'about', AboutViewSet, basename='about')
+router.register(r'news', NewsViewSet, basename='news')
 
 urlpatterns = [
     path('', include(router.urls)),

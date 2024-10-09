@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import TeamMember, Service, Publication, Review, Search, ContactInformation, About
+from .models import TeamMember, Service, Publication, Review, Search, ContactInformation, About,News
 from .validators import validate_phone_number, validate_email
 
 class TeamMemberSerializer(serializers.ModelSerializer):
@@ -54,3 +54,11 @@ class AboutSerializer(serializers.ModelSerializer):
     class Meta:
         model = About
         fields = '__all__'
+
+
+class NewsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = News
+        fields = '__all__'
+        read_only_fields = ['id', 'slug', 'created_time', 'updated_time', 'view_count']
+

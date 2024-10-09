@@ -62,7 +62,7 @@ class Review(Times):
 
 class Search(Times):
     content_type = models.CharField(max_length=20)
-    id = models.IntegerField()
+    id = models.AutoField(primary_key=True)
 
     def __str__(self):
         return f'Search: {self.content_type} - {self.id}'
@@ -82,3 +82,23 @@ class About(Times):
 
     def __str__(self):
         return self.title
+
+
+class News(models.Model):
+    title = models.CharField(max_length=200)
+    short_description = models.TextField()
+    long_description = models.TextField()
+    image = models.ImageField(upload_to='news_images/', null=True, blank=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    view_count = models.IntegerField(default=0)
+    created_time = models.DateTimeField(auto_now_add=True)
+    updated_time = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
